@@ -190,10 +190,10 @@ void procurar(void)
 	printf("\033[m");
 }
 
-int verificaSeCidadeJaExiste(char *cidades, char nome_cidade, int qtd_cidades)
+int verificaSeCidadeJaExiste(char *cidades, char nome_cidade)
 {
 	int i;
-	for (i = 0; i < qtd_cidades; i++)
+	for (i = 0; i < NUMERO_CIDADES; i++)
 	{
 		if (cidades[i] == nome_cidade)
 			return 1;
@@ -244,14 +244,16 @@ int main(int argc, char **argv)
 		cidades[count_arestas] = cidadeX;
 		cidades[count_arestas + 1] = cidadeY;
 		custos_from_file[j] = valor_distancia;
-		if (!verificaSeCidadeJaExiste(cidades, cidadeX, count_arestas + 1))
+		if (!verificaSeCidadeJaExiste(chave_das_cidades, cidadeX))
 		{
+			// printf("%d - %c\n", k, cidadeX);
 			chave_das_cidades[k] = cidadeX;
 			NUMERO_CIDADES++;
 			k++;
 		}
-		if (!verificaSeCidadeJaExiste(cidades, cidadeY, count_arestas + 1))
+		if (!verificaSeCidadeJaExiste(chave_das_cidades, cidadeY))
 		{
+			// printf("%d - %c\n", k, cidadeY);
 			chave_das_cidades[k] = cidadeY;
 			NUMERO_CIDADES++;
 			k++;
@@ -267,10 +269,8 @@ int main(int argc, char **argv)
 	j = 0;
 	for (i = 0; i < numero_arestas * 2; i += 2)
 	{
-		printf("%c %c %d\n", cidades[i], cidades[i + 1], custos_from_file[j]);
-		// int origem = retornaChaveCidadePeloNome(cidades, cidades[i]);
-		// int destino = retornaChaveCidadePeloNome(cidades, cidades[i + 1]);
-		// printf("KEYS: %d %d\n", origem, destino);
+		int origem = retornaChaveCidadePeloNome(chave_das_cidades, cidades[i]);
+		int destino = retornaChaveCidadePeloNome(chave_das_cidades, cidades[i + 1]);
 		// custos[(origem - 1) * NUMERO_CIDADES + destino - 1] = custos_from_file[j];
 		j++;
 	}
