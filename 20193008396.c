@@ -227,7 +227,8 @@ int main(int argc, char **argv)
 	char *cidades;
 	char *chave_das_cidades;
 	int *custos_from_file;
-	int j, k = 0;
+	int k = 0;
+	int j = 0;
 	// cidades = (Cidade*) realloc(cidades, 2);
 	printf("Digite o nome do arquivo de entrada: \n");
 	// scanf("%s", nome_arquivo);
@@ -243,26 +244,24 @@ int main(int argc, char **argv)
 		cidades[count_arestas] = cidadeX;
 		cidades[count_arestas + 1] = cidadeY;
 		custos_from_file[j] = valor_distancia;
-		printf("%c\n", cidadeX);
 		if (!verificaSeCidadeJaExiste(cidades, cidadeX, count_arestas + 1))
 		{
-			// chave_das_cidades[k] = cidadeX;
+			chave_das_cidades[k] = cidadeX;
 			NUMERO_CIDADES++;
-			// k++;
+			k++;
 		}
 		if (!verificaSeCidadeJaExiste(cidades, cidadeY, count_arestas + 1))
 		{
-			// chave_das_cidades[k] = cidadeY;
+			chave_das_cidades[k] = cidadeY;
 			NUMERO_CIDADES++;
-			// k++;
+			k++;
 		}
 
-		// printf("%c %c %d\n", cidades[count_arestas], cidades[count_arestas + 1], custos_from_file[j]);
 		j++;
 		count_arestas += 2;
 	} while (count_arestas < numero_arestas * 2);
-
-	fclose(arquivo);
+	printf("saiu do while\n");
+	// fclose(arquivo);
 
 	int i;
 	j = 0;
@@ -275,10 +274,10 @@ int main(int argc, char **argv)
 		// custos[(origem - 1) * NUMERO_CIDADES + destino - 1] = custos_from_file[j];
 		j++;
 	}
+	// free(cidades);
+	// free(chave_das_cidades);
+	// free(custos_from_file);
 	printf("saiu do while? %d", NUMERO_CIDADES);
-	char opcao[3], l[50];
 
-	// procurar();
-	FLSH;
 	return 0;
 }
